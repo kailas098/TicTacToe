@@ -23,8 +23,12 @@ public class TicTacToe
 			if (foundWinner(board, !isPlayerX, pX_char, pO_char)) {
 				System.out.println("Winner is " + cur_player);
 				break;
-
 			}
+		}
+
+		if(isFilled(board))
+		{
+			System.out.println("It's a draw");
 		}
 	}
 
@@ -78,11 +82,12 @@ public class TicTacToe
 				else
 					break;
 			}
+			if(points==3)
+				return true;
+			else
+				points = 0;
 		}
-		if(points==3)
-			return true;
 
-		points = 0;
 		for(int i=row;i<3;i++)
 		{
 			for(int j=col;j<3;j++)
@@ -92,11 +97,12 @@ public class TicTacToe
 				else
 					break;
 			}
+			if(points==3)
+				return true;
+			else
+				points = 0;
 		}
-		if(points==3)
-			return true;
 
-		points = 0;
 		for(int i=row;i<3;i++)
 		{
 			if(board[i][i]==cur_player_char)
@@ -119,11 +125,11 @@ public class TicTacToe
 	{
 		String[] pos = coord.split(",");
 
-		int row = Integer.parseInt(pos[0]);
-		int col = Integer.parseInt(pos[1]);
+		int row = Integer.parseInt(pos[0])-1;
+		int col = Integer.parseInt(pos[1])-1;
 
-		if(board[row-1][col-1]==' ') {
-			board[row - 1][col - 1] = isPlayerX ? pX_char : pO_char;
+		if( row<=3 && col<=3 && board[row][col]==' ' ) {
+			board[row][col] = isPlayerX ? pX_char : pO_char;
 			return !isPlayerX;
 		}
 		else {
